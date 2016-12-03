@@ -1,0 +1,13 @@
+{
+  "name": "predictive-push",
+  "version": "0.0.1",
+  "description": "Express middleware to predictively push resources using HTTP/2 push",
+  "main": "server.js",
+  "author": "Hadi Michael <hadimichael@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
+    "spdy": "^3.4.4"
+  }
+}
