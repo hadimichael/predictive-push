@@ -2,7 +2,13 @@ const fs = require('fs');
 const spdy = require('spdy');
 const express = require('express');
 
-const predictivePush = require('./lib/predictivePush');
+const predictivePushOptions = {
+	confidenceThreshold: 0.24,
+	rootDir: __dirname,
+	staticRoute: '/static',
+};
+
+const predictivePush = require('./lib/predictivePush')(predictivePushOptions);
 
 const port = 3000;
 const app = express();
@@ -13,7 +19,7 @@ const options = {
 };
 
 app.use(predictivePush);
-app.use('/static', express.static('static'));
+app.use(predictivePushOptions.staticRoute, express.static('static'));
 app.set('view engine', 'pug')
 const viewOptions = {
 	index: {
@@ -25,8 +31,14 @@ const viewOptions = {
 	app: {
 		title: 'App',
 		stylesheets: [],
-		message: 'My app',
+		message: 'My App',
 		scripts: ['/static/application.js', '/static/library.js'],
+	},
+	superApp: {
+		title: 'Super App',
+		stylesheets: ['/static/styles.css'],
+		message: 'My Super App',
+		scripts: ['/static/application.js', '/static/library.js', '/static/bundle.js'],
 	}
 }
 
@@ -36,6 +48,10 @@ app.get('/', (req, res) => {
 
 app.get('/app', (req, res) => {
 	res.render('template', viewOptions.app);
+})
+
+app.get('/admin', (req, res) => {
+	res.render('template', viewOptions.superApp);
 })
 
 app.get('*', (req, res) => {

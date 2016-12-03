@@ -6,7 +6,9 @@
   "author": "Hadi Michael <hadimichael@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^1.1.3",
     "express": "^4.14.0",
+    "naivebayesclassifier": "^0.2.0",
     "pug": "^2.0.0-beta6",
     "spdy": "^3.4.4"
   }
