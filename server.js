@@ -20,7 +20,8 @@ const options = {
 
 app.use(predictivePush);
 app.use(predictivePushOptions.staticRoute, express.static('static'));
-app.set('view engine', 'pug')
+app.set('view engine', 'pug');
+
 const viewOptions = {
 	index: {
 		title: 'Home | Predictive push',
@@ -40,19 +41,19 @@ const viewOptions = {
 		message: 'My Super App',
 		scripts: ['/static/application.js', '/static/library.js', '/static/bundle.js'],
 	}
-}
+};
 
 app.get('/', (req, res) => {
 	res.render('template', viewOptions.index);
-})
+});
 
 app.get('/app', (req, res) => {
 	res.render('template', viewOptions.app);
-})
+});
 
 app.get('/admin', (req, res) => {
 	res.render('template', viewOptions.superApp);
-})
+});
 
 app.get('*', (req, res) => {
     res
@@ -69,4 +70,4 @@ spdy
     } else {
       console.log(`HTTP/2 Server listening on port: ${port}`);
     }
-  })
+  });
